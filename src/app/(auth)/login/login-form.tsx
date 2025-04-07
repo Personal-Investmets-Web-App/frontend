@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import Link from "next/link"
 import { EyeIcon, EyeOffIcon, KeyIcon, MailIcon } from "lucide-react"
 import { useState } from "react"
+import { Separator } from "@/components/ui/separator"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -49,11 +50,11 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
         <h2 className="text-2xl font-bold">Access your account</h2>
         <span className="text-sm flex items-center gap-1 mt-8">
           Don&apos;t have an account? 
-          <Link href="/register" className="text-sm text-muted-foreground hover:underline transition-all duration-300 hover:text-primary">Sign up</Link>
+          <Link href="/register" className="font-bold text-sm text-secondary hover:underline transition-all duration-300 hover:text-primary">Sign up</Link>
         </span>
         <div className="space-y-3 min-w-[300px] md:min-w-[400px] mt-6">
           <FormField
@@ -94,15 +95,26 @@ export function LoginForm() {
             )}
           />
           <div className="flex justify-end">
-            <Link href="/reset-password" className="font-bold text-sm text-muted-foreground hover:underline transition-all duration-300 hover:text-primary">Forgot your password?</Link>
+            <Link href="/reset-password" className="font-bold text-sm text-secondary hover:underline transition-all duration-300 hover:text-primary">Forgot your password?</Link>
           </div>
         </div>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col gap-4">
           <Button type="submit" className="w-full">
-            Submit
+            Access
           </Button>
         </div>
-        <FormMessage />
+        <div className="my-6 flex gap-4 items-center">
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+          <span className="text-sm text-muted-foreground">Or</span>
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+        </div>
+        <Button className="w-full" variant="outline">
+          Sign in with Google
+        </Button>
       </form>
     </Form>
   )

@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: hsl(221 36% 99%);
-  --foreground: hsl(221 52% 0%);
+  --background: hsl(221 83% 93%);
+  --foreground: hsl(221 83% 27%);
   --muted: hsl(221 83% 95%);
   --muted-foreground: hsl(221 83% 82%);
   --popover: hsl(221 36% 99%);
@@ -16,9 +16,9 @@
   --input: hsl(221 83% 83%);
   --primary: hsl(221 83% 53%);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(41 83% 53%);
+  --secondary: hsl(41deg 97.18% 26.43%);
   --secondary-foreground: hsl(41 83% 13%);
-  --accent: hsl(53.21 27.08% 76.79%);
+  --accent: hsl(41 83% 53%);
   --accent-foreground: hsl(41 83% 13%);
   --destructive: hsl(10 87% 26%);
   --destructive-foreground: hsl(10 87% 86%);
@@ -28,12 +28,12 @@
   --chart-3: hsl(41 83% 53%);
   --chart-4: hsl(41 83% 56%);
   --chart-5: hsl(221 86% 53%);
-  --radius: 0.5rem;
+  --radius: 0.75rem;
 }
 
 .dark {
-  --background: hsl(221 47% 2%);
-  --foreground: hsl(221 38% 97%);
+  --background: hsl(221 83% 17%);
+  --foreground: hsl(221 83% 93%);
   --muted: hsl(41 20% 13%);
   --muted-foreground: hsl(41 12% 72%);
   --popover: hsl(221 47% 2%);

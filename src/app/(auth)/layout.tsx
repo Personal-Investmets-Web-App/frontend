@@ -13,8 +13,8 @@ export default function AuthLayout({
 }>) {
   return (
     <main className="flex items-center h-screen w-screen">
-      <div className="hidden md:block md:w-1/3 bg-primary h-full"></div>
-      <div className="w-full md:w-2/3 h-full flex flex-col items-center justify-between">
+      <div className="hidden xl:block md:w-1/3 bg-primary h-full"></div>
+      <div className="w-full xl:w-2/3 h-full flex flex-col items-center justify-between">
         <div className="w-full flex justify-end items-center p-4">
           <ModeToggle />
         </div>
