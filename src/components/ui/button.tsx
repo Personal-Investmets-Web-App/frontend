@@ -11,6 +11,7 @@ const buttonVariants = cva(
       variant: {
         default:
           "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+        primary: "bg-primary text-primary-foreground font-bold text-md shadow-(color:--primary)/50 hover:shadow-[6px_6px_0px_0px] shadow-[0px_6px_0px_0px] cursor-pointer active:shadow-none active:translate-x-2 active:translate-y-2 transition-all duration-200",
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
@@ -29,8 +30,8 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "primary",
+      size: "lg",
     },
   }
 )

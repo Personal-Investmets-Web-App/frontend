@@ -6,14 +6,14 @@
 :root {
   --background: hsl(221 36% 99%);
   --foreground: hsl(221 52% 0%);
-  --muted: hsl(41 20% 87%);
-  --muted-foreground: hsl(41 12% 28%);
+  --muted: hsl(221 83% 95%);
+  --muted-foreground: hsl(221 83% 82%);
   --popover: hsl(221 36% 99%);
   --popover-foreground: hsl(221 52% 0%);
   --card: hsl(221 36% 99%);
   --card-foreground: hsl(221 52% 0%);
   --border: hsl(221 12% 94%);
-  --input: hsl(221 12% 94%);
+  --input: hsl(221 83% 83%);
   --primary: hsl(221 83% 53%);
   --primary-foreground: hsl(0 0% 100%);
   --secondary: hsl(41 83% 53%);
