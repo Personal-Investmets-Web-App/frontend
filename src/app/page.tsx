@@ -1,5 +1,9 @@
+import Counter from "@/components/counter"
+
 export default function Login() {
   return (
-    <div>Home</div>
+    <div>
+      <Counter />
+    </div>
   )
 }

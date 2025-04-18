@@ -8,11 +8,8 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import Link from "next/link"
@@ -99,7 +96,7 @@ export function LoginForm() {
           </div>
         </div>
         <div className="mt-6 flex flex-col gap-4">
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" color="secondary">
             Access
           </Button>
         </div>
@@ -112,7 +109,7 @@ export function LoginForm() {
             <Separator orientation="horizontal" className="bg-muted-foreground" />
           </div>
         </div>
-        <Button className="w-full" variant="outline">
+        <Button className="w-full" variant="outline" color="primary">
           Sign in with Google
         </Button>
       </form>
