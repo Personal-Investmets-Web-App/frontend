@@ -4,21 +4,19 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/core/app/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "@/core/app/components/ui/form"
+import { Input } from "@/core/app/components/ui/input"
 import Link from "next/link"
-import { EyeIcon, EyeOffIcon, KeyIcon, MailIcon } from "lucide-react"
+import { EyeIcon, EyeOffIcon, KeyIcon, Loader2, MailIcon } from "lucide-react"
 import { useState } from "react"
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/core/app/components/ui/separator"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -40,23 +38,27 @@ export function LoginForm() {
   })
 
   const [showPassword, setShowPassword] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(false)
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    setIsLoading(true)
+    // const result = await login(values)
+    // if (result.error) {
+    //   form.setError("password", {
+    //     message: result.error,
+    //   })
+    // }
     console.log(values)
+    setIsLoading(false)
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
         <h2 className="text-2xl font-bold">Access your account</h2>
-        <span className="text-sm flex items-center gap-1 mt-8">
-          Don&apos;t have an account? 
-          <Link href="/register" className="font-bold text-sm text-secondary hover:underline transition-all duration-300 hover:text-primary">Sign up</Link>
-        </span>
-        <div className="space-y-3 min-w-[300px] md:min-w-[400px] mt-6">
+        <div className="space-y-3 min-w-[300px] md:min-w-[400px] mt-12">
           <FormField
             control={form.control}
             name="email"
@@ -67,10 +69,7 @@ export function LoginForm() {
                     startIcon={MailIcon}
                   />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your email address.
-                </FormDescription> */}
-                {/* <FormMessage /> */}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -87,10 +86,7 @@ export function LoginForm() {
                     onClickEndButton={() => setShowPassword(!showPassword)}
                   />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your password.
-                </FormDescription> */}
-                {/* <FormMessage /> */}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -99,11 +95,11 @@ export function LoginForm() {
           </div>
         </div>
         <div className="mt-6 flex flex-col gap-4">
-          <Button type="submit" className="w-full">
-            Access
+          <Button type="submit" className="w-full" color="secondary">
+            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Access"}
           </Button>
         </div>
-        <div className="my-6 flex gap-4 items-center">
+        <div className="mb-6 mt-8 flex gap-4 items-center">
           <div className="flex-1">
             <Separator orientation="horizontal" className="bg-muted-foreground" />
           </div>
@@ -112,9 +108,10 @@ export function LoginForm() {
             <Separator orientation="horizontal" className="bg-muted-foreground" />
           </div>
         </div>
-        <Button className="w-full" variant="outline">
-          Sign in with Google
-        </Button>
+        <span className="text-sm flex items-center justify-center gap-1">
+          Don&apos;t have an account? 
+          <Link href="/register" className="font-bold text-sm text-secondary hover:underline transition-all duration-300 hover:text-primary">Sign up</Link>
+        </span>
       </form>
     </Form>
   )

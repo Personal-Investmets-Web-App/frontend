@@ -8,19 +8,19 @@
   --foreground: hsl(221 83% 27%);
   --muted: hsl(221 83% 95%);
   --muted-foreground: hsl(221 83% 82%);
-  --popover: hsl(221 36% 99%);
+  --popover: hsl(221 83% 95%);
   --popover-foreground: hsl(221 52% 0%);
   --card: hsl(221 36% 99%);
   --card-foreground: hsl(221 52% 0%);
   --border: hsl(221 12% 94%);
   --input: hsl(221 83% 83%);
-  --primary: hsl(221 83% 53%);
+  --primary: hsl(221 83% 23%);
   --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(41deg 97.18% 26.43%);
+  --secondary: hsl(41 97.18% 26.43%);
   --secondary-foreground: hsl(41 83% 13%);
   --accent: hsl(41 83% 53%);
   --accent-foreground: hsl(41 83% 13%);
-  --destructive: hsl(10 87% 26%);
+  --destructive: hsl(10 87% 46%);
   --destructive-foreground: hsl(10 87% 86%);
   --ring: hsl(221 83% 53%);
   --chart-1: hsl(221 83% 53%);
@@ -31,7 +31,8 @@
   --radius: 0.75rem;
 }
 
-.dark {
+/* TODO: Add dark mode */
+/* .dark {
   --background: hsl(221 83% 17%);
   --foreground: hsl(221 83% 93%);
   --muted: hsl(41 20% 13%);
@@ -56,7 +57,7 @@
   --chart-3: hsl(41 83% 53%);
   --chart-4: hsl(41 83% 56%);
   --chart-5: hsl(221 86% 53%);
-}
+} */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

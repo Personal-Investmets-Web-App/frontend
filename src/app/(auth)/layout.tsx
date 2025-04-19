@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/theme-toggle";
+import { ModeToggle } from "@/core/app/components/theme-toggle";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
