@@ -79,7 +79,7 @@ export function LoginForm() {
           ? <Loader2 className="w-4 h-4 animate-spin" /> 
           : <>
               <Image src="/google.svg" alt="Google" width={20} height={20} />
-              <span className="ml-2">Sign in with Google</span>
+              <span className="ml-2">with Google</span>
             </>
           }
         </Button>
@@ -100,7 +100,7 @@ export function LoginForm() {
               render={({ field }) => (
                 <FormItem className="gap-0">
                   <FormControl>
-                    <Input placeholder="Email" type="email"  {...field}
+                    <Input placeholder="Enter your email" type="email"  {...field}
                       startIcon={MailIcon}
                     />
                   </FormControl>
@@ -118,7 +118,7 @@ export function LoginForm() {
               render={({ field }) => (
                 <FormItem className="gap-0">
                   <FormControl>
-                    <Input placeholder="Password" type={showPassword ? "text" : "password"} {...field}
+                    <Input placeholder="Enter your password" type={showPassword ? "text" : "password"} {...field}
                       startIcon={KeyIcon}
                       endIcon={showPassword ? EyeIcon : EyeOffIcon}
                       onClickEndButton={() => setShowPassword(!showPassword)}

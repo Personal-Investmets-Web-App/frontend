@@ -88,7 +88,7 @@ export function RegisterForm() {
           ? <Loader2 className="w-4 h-4 animate-spin" /> 
           : <>
               <Image src="/google.svg" alt="Google" width={20} height={20} />
-              <span className="ml-2">Sign up with Google</span>
+              <span className="ml-2">with Google</span>
             </>
           }
         </Button>
