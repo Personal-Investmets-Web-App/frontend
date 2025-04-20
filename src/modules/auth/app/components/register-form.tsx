@@ -14,6 +14,10 @@ import {
 } from "@/core/app/components/ui/form"
 import { Input } from "@/core/app/components/ui/input"
 import Link from "next/link"
+import { EyeIcon, EyeOffIcon, KeyIcon, Loader2, MailIcon } from "lucide-react"
+import { useState } from "react"
+import { Separator } from "@/core/app/components/ui/separator"
+import Image from "next/image"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -22,21 +26,9 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
-  confirmPassword: z.string().min(8, {
+  verifyPassword: z.string().min(8, {
     message: "Password must be at least 8 characters.",
   }),
-  name: z.string().min(1, {
-    message: "Name is required.",
-  }),
-  lastName: z.string().min(1, {
-    message: "Last name is required.",
-  }),
-  /* 
-  Use this later to validate password:
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, {
-    message: "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
-  })
-  */
 })
 
 export function RegisterForm() {
@@ -46,40 +38,76 @@ export function RegisterForm() {
     defaultValues: {
       email: "",
       password: "",
-      confirmPassword: "",
-      name: "",
-      lastName: "",
+      verifyPassword: "",
     },
   })
 
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    if (values.password !== values.verifyPassword) {
+      form.setError("verifyPassword", {
+        message: "Passwords do not match.",
+      })
+      return
+    }
+
+    setIsLoading(true)
+    setIsLoading(false)
+  }
+
+  const handleGoogleLogin = async () => {
+    setIsLoading(true)
+    // const result = await loginWithGoogle()
+    // if (result.error) {
+    //   form.setError("email", {
+    //     message: result.error,
+    //   })
+    // }
+    console.log("Google login")
+    setIsLoading(false)
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <h2 className="text-2xl font-bold">Create an account</h2>
-        <span className="text-sm flex items-center gap-2 mt-8">
-          Already have an account? 
-          <Link href="/login" className="text-primary underline font-bold">Login -&gt;</Link>
-        </span>
-        <div className="space-y-3 min-w-[300px] md:min-w-[400px] mt-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
+        <h2 className="text-2xl font-bold">Create your account</h2>
+        <div className="mt-6 flex flex-col gap-4">
+          <Button className="w-full" color="primary" onClick={handleGoogleLogin}>
+            {isLoading 
+            ? <Loader2 className="w-4 h-4 animate-spin" /> 
+            : <>
+                <Image src="/google.svg" alt="Google" width={20} height={20} />
+                <span className="ml-2">Sign up with Google</span>
+              </>
+            }
+          </Button>
+        </div>
+        <div className="my-8 flex gap-4 items-center">
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+          <span className="text-sm text-muted-foreground">Or</span>
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+        </div>
+        <div className="space-y-3 min-w-[300px] md:min-w-[400px]">
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="example@email.com"  {...field} />
+                  <Input placeholder="Enter your email" type="email"  {...field}
+                    startIcon={MailIcon}
+                  />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your email address.
-                </FormDescription> */}
-                {/* <FormMessage /> */}
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -90,62 +118,52 @@ export function RegisterForm() {
               <FormItem>
                 {/* <FormLabel>Password</FormLabel> */}
                 <FormControl>
-                  <Input placeholder="********" {...field} />
+                  <Input placeholder="Enter your password" type={showPassword ? "text" : "password"} {...field}
+                    startIcon={KeyIcon}
+                    endIcon={showPassword ? EyeIcon : EyeOffIcon}
+                    onClickEndButton={() => setShowPassword(!showPassword)}
+                  />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your password.
-                </FormDescription> */}
-                {/* <FormMessage /> */}
+                <FormMessage />
               </FormItem>
             )}
           />
           <FormField
             control={form.control}
-            name="confirmPassword"
+            name="verifyPassword"
             render={({ field }) => (
               <FormItem>
+                {/* <FormLabel>Password</FormLabel> */}
                 <FormControl>
-                  <Input placeholder="********" {...field} />
+                  <Input placeholder="Verify your password" type={showPassword ? "text" : "password"} {...field}
+                    startIcon={KeyIcon}
+                    endIcon={showPassword ? EyeIcon : EyeOffIcon}
+                    onClickEndButton={() => setShowPassword(!showPassword)}
+                  />
                 </FormControl>
-                {/* <FormDescription>
-                  This is your password.
-                </FormDescription> */}
-                {/* <FormMessage /> */}
+                <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="John" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Doe" {...field} />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <div className="flex justify-end">
-            <Link href="/reset-password" className="font-bold text-sm text-muted-foreground hover:underline transition-all duration-300 hover:text-primary">Forgot your password?</Link>
-          </div>
         </div>
-        <div className="mt-6">
-          <Button type="submit" className="w-full">
-            Submit
+        <div className="mt-10 flex flex-col gap-4">
+          <Button type="submit" className="w-full" color="secondary" disabled={isLoading}>
+            {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Create account"}
           </Button>
         </div>
-        <FormMessage />
+        <div className="mb-6 mt-8 flex gap-4 items-center">
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+          <span className="text-sm text-muted-foreground">Or</span>
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+        </div>
+        <span className="text-sm flex items-center justify-center gap-1">
+          Already have an account? 
+          <Link href="/login" className="font-bold text-sm text-secondary hover:underline transition-all duration-300 hover:text-primary">Sign in</Link>
+        </span>
       </form>
     </Form>
   )

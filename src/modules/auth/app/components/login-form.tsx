@@ -17,6 +17,7 @@ import Link from "next/link"
 import { EyeIcon, EyeOffIcon, KeyIcon, Loader2, MailIcon } from "lucide-react"
 import { useState } from "react"
 import { Separator } from "@/core/app/components/ui/separator"
+import Image from "next/image"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -54,11 +55,43 @@ export function LoginForm() {
     setIsLoading(false)
   }
 
+  const handleGoogleLogin = async () => {
+    setIsLoading(true)
+    // const result = await loginWithGoogle()
+    // if (result.error) {
+    //   form.setError("email", {
+    //     message: result.error,
+    //   })
+    // }
+    console.log("Google login")
+    setIsLoading(false)
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
         <h2 className="text-2xl font-bold">Access your account</h2>
-        <div className="space-y-3 min-w-[300px] md:min-w-[400px] mt-12">
+        <div className="mt-6 flex flex-col gap-4">
+          <Button className="w-full" color="primary" onClick={handleGoogleLogin}>
+            {isLoading 
+            ? <Loader2 className="w-4 h-4 animate-spin" /> 
+            : <>
+                <Image src="/google.svg" alt="Google" width={20} height={20} />
+                <span className="ml-2">Sign in with Google</span>
+              </>
+            }
+          </Button>
+        </div>
+        <div className="my-8 flex gap-4 items-center">
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+          <span className="text-sm text-muted-foreground">Or</span>
+          <div className="flex-1">
+            <Separator orientation="horizontal" className="bg-muted-foreground" />
+          </div>
+        </div>
+        <div className="space-y-3 min-w-[300px] md:min-w-[400px]">
           <FormField
             control={form.control}
             name="email"
@@ -99,16 +132,7 @@ export function LoginForm() {
             {isLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Access"}
           </Button>
         </div>
-        <div className="mb-6 mt-8 flex gap-4 items-center">
-          <div className="flex-1">
-            <Separator orientation="horizontal" className="bg-muted-foreground" />
-          </div>
-          <span className="text-sm text-muted-foreground">Or</span>
-          <div className="flex-1">
-            <Separator orientation="horizontal" className="bg-muted-foreground" />
-          </div>
-        </div>
-        <span className="text-sm flex items-center justify-center gap-1">
+        <span className="text-sm flex items-center justify-start gap-1 mt-6">
           Don&apos;t have an account? 
           <Link href="/register" className="font-bold text-sm text-secondary hover:underline transition-all duration-300 hover:text-primary">Sign up</Link>
         </span>
