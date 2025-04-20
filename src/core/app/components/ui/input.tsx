@@ -33,11 +33,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {StartIcon && (
           <div className={
             cn(
-              "absolute left-2 top-1/2 transform -translate-y-1/2",
+              "absolute left-3 top-1/2 transform -translate-y-1/2",
               onClickStartButton ? "cursor-pointer" : ""
             )
           } onClick={handleStartIconClick}>
-            <StartIcon size={18} className={
+            <StartIcon size={20} className={
               cn(
                 "text-muted-foreground",
                 onClickStartButton ? "cursor-pointer transition-all duration-300 hover:text-primary" : ""
@@ -48,9 +48,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           className={cn(
-            "flex w-full rounded-md border-input border-2 bg-muted px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
-            startIcon ? "pl-8" : "",
-            endIcon ? "pr-8" : "",
+            "flex w-full rounded-md border-input border-0 bg-muted px-6 py-4 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+            startIcon ? "pl-10" : "",
+            endIcon ? "pr-10" : "",
             className
           )}
           ref={ref}
@@ -59,7 +59,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {EndIcon && (
           <div className={
             cn(
-              "absolute right-3 top-1/2 transform -translate-y-1/2",
+              "absolute right-4 top-1/2 transform -translate-y-1/2",
               onClickEndButton ? "cursor-pointer" : ""
             )
           } onClick={handleEndIconClick}>
@@ -68,7 +68,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                 "text-muted-foreground",
                 onClickEndButton ? "cursor-pointer transition-all duration-300 hover:text-primary" : ""
               )
-            } size={18} />
+            } size={20} />
           </div>
         )}
       </div>

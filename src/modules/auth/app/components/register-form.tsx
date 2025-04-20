@@ -15,7 +15,7 @@ import {
 } from "@/core/app/components/ui/form"
 import { Input } from "@/core/app/components/ui/input"
 import Link from "next/link"
-import { EyeIcon, EyeOffIcon, KeyIcon, Loader2, MailIcon } from "lucide-react"
+import { EyeIcon, EyeOffIcon, KeyIcon, Loader2, LockIcon, MailIcon } from "lucide-react"
 import { useState } from "react"
 import { Separator } from "@/core/app/components/ui/separator"
 import Image from "next/image"
@@ -150,7 +150,7 @@ export function RegisterForm() {
                   {/* <FormLabel>Password</FormLabel> */}
                   <FormControl>
                     <Input placeholder="Verify your password" type={showPassword ? "text" : "password"} {...field}
-                      startIcon={KeyIcon}
+                      startIcon={LockIcon}
                       endIcon={showPassword ? EyeIcon : EyeOffIcon}
                       onClickEndButton={() => setShowPassword(!showPassword)}
                     />
