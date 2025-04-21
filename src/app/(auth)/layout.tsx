@@ -31,7 +31,7 @@ export default function AuthLayout({
         </div>
         <div className="w-full p-4">
           <p className="text-sm text-muted-foreground">
-            &copy; 2025
+            &copy;
           </p>
         </div>
       </div>

@@ -19,22 +19,11 @@ import { EyeIcon, EyeOffIcon, KeyIcon, Loader2, MailIcon } from "lucide-react"
 import { useState } from "react"
 import { Separator } from "@/core/app/components/ui/separator"
 import Image from "next/image"
-
-const formSchema = z.object({
-  email: z.string().min(1, {
-    message: "Email is required.",
-  }).email({
-    message: "Invalid email address.",
-  }),
-  password: z.string().min(1, {
-    message: "Password is required.",
-  }),
-}).strict()
+import { LoginSchema } from "../../infra/auth.models"
 
 export function LoginForm() {
-  // 1. Define your form.
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
     defaultValues: {
       email: "",
       password: "",
@@ -43,18 +32,28 @@ export function LoginForm() {
 
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+
+
+  async function onSubmitLocalLogin(values: z.infer<typeof LoginSchema>) {
     setIsLoading(true)
-    // const result = await login(values)
-    // if (result.error) {
-    //   form.setError("password", {
-    //     message: result.error,
-    //   })
-    // }
-    console.log(values)
+
+    const response = await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify(values),
+    })
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      form.setError("password", {
+        message: errorData.message || "Login failed",
+      });
+      setIsLoading(false)
+      return;
+    }
+
+    const data = await response.json();
+    console.log("Login successful", data.user, data.accessToken);
+
     setIsLoading(false)
   }
 
@@ -83,7 +82,7 @@ export function LoginForm() {
             </>
           }
         </Button>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col">
+        <form onSubmit={form.handleSubmit(onSubmitLocalLogin)} className="flex flex-col">
           <div className="my-4 flex gap-4 items-center">
             <div className="flex-1">
               <Separator orientation="horizontal" className="bg-muted-foreground" />

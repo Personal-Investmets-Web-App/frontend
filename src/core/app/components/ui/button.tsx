@@ -46,7 +46,7 @@ const buttonVariants = cva(
       {
         variant: "link",
         color: "primary",
-        className: "text-primary/30 hover:text-primary/90 shadow-none bg-transparent text-primary hover:shadow-none hover:underline hover:bg-transparent hover:translate-y-0 hover:cursor-pointer",
+        className: "text-primary/30 hover:text-primary/90 shadow-none bg-transparent hover:shadow-none hover:underline hover:bg-transparent hover:translate-y-0 hover:cursor-pointer",
       },
     ],
   }
